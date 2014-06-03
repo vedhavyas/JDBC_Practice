@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConnectionFactory {
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://172.19.4.18/jdbc_test";
+	static final String DB_URL = "jdbc:mysql://192.168.159.1/jdbc_test";
 	
 	static final String USER_NAME = "root";
 	static final String PASSWORD = "root123";

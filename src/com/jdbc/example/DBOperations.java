@@ -39,9 +39,38 @@ public class DBOperations {
 		return retVal;
 	}
 	
-	public static void printDbObj(ArrayList<DatabaseObject> dbObj){
-		for(DatabaseObject object : dbObj){
-			System.out.println("ID : "+object.getID()+"| Name : "+object.getName()+"| Email : "+object.getEmail());
+	public static DatabaseObject getByID(int ID){
+		Connection connection = ConnectionFactory.getConnection();
+		DatabaseObject obj = null;
+		try {
+			Statement stmnt = connection.createStatement();
+			String sql = "select * from jdbctable where ID="+ID;
+			ResultSet rs = stmnt.executeQuery(sql);
+			while(rs.next()){
+				obj = new DatabaseObject(rs.getInt("ID"), rs.getString("Name"), rs.getString("Email"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return obj;
+	}
+	
+	public static void printDbObjsFromList(ArrayList<DatabaseObject> dbObj){
+		System.out.println("-------------------------------");
+		System.out.println("| ID |    Name   |    Email   |");
+		System.out.println("-------------------------------");
+		for(DatabaseObject object : dbObj){
+			System.out.println("|"+object.getID()+"|"+object.getName()+"|"+object.getEmail()+"|");
+			System.out.println("-------------------------------");
+		}
+	}
+	
+	public static void printObj(DatabaseObject object){
+		System.out.println("-------------------------------");
+		System.out.println("| ID |    Name   |    Email   |");
+		System.out.println("-------------------------------");
+		System.out.println("|"+object.getID()+"|"+object.getName()+"|"+object.getEmail()+"|");
+		System.out.println("-------------------------------");
 	}
 }
